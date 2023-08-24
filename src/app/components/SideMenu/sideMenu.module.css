@@ -1,0 +1,27 @@
+.sideMenu {
+  width: 150px;
+  height: 100vh;
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+}
+
+.sideMenu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sideMenu li {
+  margin-bottom: 10px;
+}
+
+.sideMenu a {
+  text-decoration: none;
+  color: #fff;
+  transition: color 0.3s;
+}
+
+.sideMenu a:hover {
+  color: #00aaff;
+}

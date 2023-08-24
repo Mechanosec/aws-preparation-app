@@ -1,0 +1,54 @@
+.Project {
+  padding: 20px;
+  width: 100%;
+}
+
+.ProjectHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ProjectHeader h1 {
+  font-size: 40px;
+}
+
+.ProjectHeader button {
+  height: 45px;
+  padding: 8px;
+  border-radius: 5px;
+
+  color: white;
+  background-color: green;
+}
+
+.Project input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.Project table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #ddd;
+}
+
+.Project th,
+.Project td {
+  padding: 12px;
+  text-align: left;
+}
+
+.Project th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.Project tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.Project tbody tr:hover {
+  background-color: #ddd;
+}
