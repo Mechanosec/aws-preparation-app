@@ -1,4 +1,7 @@
+"use client";
 import { FC } from "react";
+import { S3Service } from "../../../aws/s3/s3.service";
+import { useQuery } from "@tanstack/react-query";
 
 const someS3data = [
   {
@@ -28,6 +31,10 @@ const someS3data = [
 ];
 
 const S3Page: FC = () => {
+  const s3Service = new S3Service();
+  const { data } = useQuery(["Bucket"], s3Service.getAll());
+  console.log(data);
+
   return (
     <div>
       <table>
