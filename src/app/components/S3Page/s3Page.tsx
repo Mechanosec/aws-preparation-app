@@ -1,15 +1,16 @@
 "use client";
-import {FC, useMemo, useState} from "react";
+import { FC, useMemo, useState } from "react";
 import { useGetS3 } from "@/app/hooks/useGetS3/useGetS3";
 import {
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
-  getSortedRowModel, SortingState,
-  useReactTable
+  getSortedRowModel,
+  SortingState,
+  useReactTable,
 } from "@tanstack/react-table";
 import BaseTable from "@/app/components/BaseTable/BaseTable";
-import {s3TableColumns} from "@/app/components/S3Page/data";
+import { s3TableColumns } from "@/app/components/S3Page/data";
 import TablePagination from "@/app/components/BasePagination/BasePagination";
 
 const someS3data = [
@@ -41,7 +42,7 @@ const someS3data = [
 
 const S3Page: FC = () => {
   const [rowSelection, setRowSelection] = useState({});
-  const [sorting, setSorting] = useState<SortingState>([])
+  const [sorting, setSorting] = useState<SortingState>([]);
 
   const { s3Data } = useGetS3();
 
@@ -59,8 +60,8 @@ const S3Page: FC = () => {
     onSortingChange: setSorting,
     state: {
       sorting,
-      rowSelection
-    }
+      rowSelection,
+    },
   });
 
   return (
