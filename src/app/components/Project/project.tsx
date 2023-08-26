@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./project.module.css";
+import Header from "../Header/header";
 
 const initialData = [
   { id: 1, name: "John", age: 25 },
@@ -11,10 +12,7 @@ const initialData = [
 const Project: React.FC = () => {
   return (
     <div className={styles.Project}>
-      <div className={styles.ProjectHeader}>
-        <h1>Projects</h1>
-        <button>Create</button>
-      </div>
+      <Header />
       <table>
         <thead>
           <tr>

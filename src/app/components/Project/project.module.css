@@ -3,25 +3,6 @@
   width: 100%;
 }
 
-.ProjectHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.ProjectHeader h1 {
-  font-size: 40px;
-}
-
-.ProjectHeader button {
-  height: 45px;
-  padding: 8px;
-  border-radius: 5px;
-
-  color: white;
-  background-color: green;
-}
-
 .Project input {
   width: 100%;
   padding: 10px;
