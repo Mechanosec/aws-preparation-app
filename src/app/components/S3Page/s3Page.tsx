@@ -1,7 +1,15 @@
 "use client";
-import { FC } from "react";
-import { S3Service } from "../../../aws/s3/s3.service";
-import { useQuery } from "@tanstack/react-query";
+import {FC, useMemo, useState} from "react";
+import { useGetS3 } from "@/app/hooks/useGetS3/useGetS3";
+import {
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel, SortingState,
+  useReactTable
+} from "@tanstack/react-table";
+import BaseTable from "@/app/components/BaseTable/BaseTable";
+import {s3TableColumns} from "@/app/components/S3Page/data";
 
 const someS3data = [
   {
@@ -18,7 +26,7 @@ const someS3data = [
   },
   {
     name: "asd",
-    region: "asd",
+    region: "asd2",
     access: "asdasd",
     creationDate: "",
   },
@@ -31,36 +39,32 @@ const someS3data = [
 ];
 
 const S3Page: FC = () => {
-  const s3Service = new S3Service();
-  const { data } = useQuery(["Bucket"], s3Service.getAll());
-  console.log(data);
+  const [rowSelection, setRowSelection] = useState({});
+  const [sorting, setSorting] = useState<SortingState>([])
+
+  const { s3Data } = useGetS3();
+
+  const columns = useMemo(() => s3TableColumns, []);
+
+  const table = useReactTable({
+    data: s3Data.length ? s3Data : someS3data,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    enableRowSelection: true,
+    onRowSelectionChange: setRowSelection,
+    onSortingChange: setSorting,
+    state: {
+      sorting,
+      rowSelection
+    }
+  });
 
   return (
     <div>
-      <table>
-        <thead>
-          <tr>
-            <th></th>
-            <th>Name</th>
-            <th>AWS Region</th>
-            <th>Access</th>
-            <th>Creation date</th>
-          </tr>
-        </thead>
-        <tbody>
-          {someS3data.map((s3Data) => {
-            return (
-              <tr key={s3Data.name}>
-                <td></td>
-                <td>{s3Data.name}</td>
-                <td>{s3Data.region}</td>
-                <td>{s3Data.access}</td>
-                <td>{s3Data.creationDate}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      <BaseTable table={table} />
     </div>
   );
 };
