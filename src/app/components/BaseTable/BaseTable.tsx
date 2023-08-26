@@ -2,10 +2,9 @@
 
 import {Table, flexRender } from '@tanstack/react-table';
 import { MouseEvent, ReactElement } from 'react';
+import {BaseTableType} from "@/app/common-types/table";
 
-export type BaseTableType<T> = {
-  table: Table<T>;
-}
+
 
 const BaseTable: <T>(props: BaseTableType<T>) => ReactElement = ({ table }) => {
 

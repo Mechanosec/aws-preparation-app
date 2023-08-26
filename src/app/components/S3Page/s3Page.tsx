@@ -10,6 +10,7 @@ import {
 } from "@tanstack/react-table";
 import BaseTable from "@/app/components/BaseTable/BaseTable";
 import {s3TableColumns} from "@/app/components/S3Page/data";
+import TablePagination from "@/app/components/BasePagination/BasePagination";
 
 const someS3data = [
   {
@@ -65,6 +66,7 @@ const S3Page: FC = () => {
   return (
     <div>
       <BaseTable table={table} />
+      <TablePagination table={table} />
     </div>
   );
 };
