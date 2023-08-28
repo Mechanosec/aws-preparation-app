@@ -3,7 +3,6 @@ import {
   BucketCannedACL,
   CreateBucketCommand,
   ListBucketsCommand,
-  ListBucketsCommandOutput,
   PutBucketPolicyCommand,
   PutBucketWebsiteCommand,
   S3Client,
@@ -62,8 +61,10 @@ export class S3Service {
     const listCommand = new ListBucketsCommand({});
 
     try {
+      console.log(123);
       const s3List = await this.client.send(listCommand);
 
+      console.log(s3List);
       return s3List.Buckets;
     } catch (error) {
       console.error(error);
