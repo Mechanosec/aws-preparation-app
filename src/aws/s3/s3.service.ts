@@ -1,5 +1,5 @@
 import { awsConfig } from "../configs/aws-config";
-import { S3Config, S3Object } from "./types/s3.types";
+import { S3Config, S3ObjectResponse } from "./types/s3.types";
 import {
   POLICY_CONFIG_DEFAULT,
   WEBSITE_CONFIG_DEFAULT,
@@ -14,6 +14,7 @@ import {
   PutBucketWebsiteCommand,
   S3Client,
 } from "@aws-sdk/client-s3";
+import { formatBytes } from "../../app/utils/utils";
 
 export class S3Service {
   private readonly client: S3Client;
@@ -63,9 +64,9 @@ export class S3Service {
   }
 
   public async getAll(): Promise<Bucket[] | undefined> {
-    const listCommand = new ListBucketsCommand({});
     try {
-      const s3List = await this.client.send(listCommand);
+      const getListCommand = new ListBucketsCommand({});
+      const s3List = await this.client.send(getListCommand);
 
       return s3List.Buckets;
     } catch (error) {
@@ -73,12 +74,22 @@ export class S3Service {
     }
   }
 
-  public async getObjects(bucket: string): Promise<S3Object[] | undefined> {
+  public async getObjects(
+    bucket: string,
+  ): Promise<S3ObjectResponse[] | undefined> {
     const listObjectsCommand = new ListObjectsCommand({ Bucket: bucket });
     try {
       const objectsList = await this.client.send(listObjectsCommand);
 
-      return objectsList.Contents;
+      return objectsList.Contents?.map((content) => {
+        return {
+          fileName: content.Key ?? "",
+          size: formatBytes(content.Size ?? 0),
+          lastModified:
+            content.LastModified?.toLocaleString() ??
+            new Date().toLocaleString(),
+        };
+      });
     } catch (error) {
       console.error(error);
     }

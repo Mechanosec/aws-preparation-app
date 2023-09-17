@@ -21,3 +21,9 @@ export interface S3PolicyConfig {
 export interface S3WebsiteConfig extends WebsiteConfiguration {}
 
 export interface S3Object extends _Object {}
+
+export interface S3ObjectResponse {
+  fileName: string;
+  size: string;
+  lastModified: string;
+}

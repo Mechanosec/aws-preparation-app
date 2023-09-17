@@ -1,12 +1,12 @@
 import {
   Change,
   ChangeResourceRecordSetsCommand,
-  HostedZone,
   ListHostedZonesByNameCommand,
   ListHostedZonesByNameCommandOutput,
   Route53Client,
 } from "@aws-sdk/client-route-53";
 import { awsConfig } from "../configs/aws-config";
+import { Route53Response } from "./types/route53.types";
 
 export class Route53Service {
   private readonly client: Route53Client;
@@ -45,28 +45,17 @@ export class Route53Service {
     }
   }
 
-  public async getAll(): Promise<HostedZone[] | undefined> {
+  public async getAll(): Promise<Route53Response[] | undefined> {
     const hostedZoneList = new ListHostedZonesByNameCommand({});
     try {
       const response: ListHostedZonesByNameCommandOutput =
         await this.client.send(hostedZoneList);
 
-      const responseApp = this.hostedZoneListMapping(
-        response.HostedZones ?? [],
-      );
-      console.log(responseApp);
-      return responseApp;
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  private hostedZoneListMapping(hostedZoneList: HostedZone[]) {
-    try {
-      return hostedZoneList.map((hostedZone) => {
-        hostedZone.Id = hostedZone.Id?.replace("/hostedzone/", "");
-        hostedZone.Name = hostedZone.Name?.slice(0, -1);
-        return hostedZone;
+      return response.HostedZones?.map((hostedZone) => {
+        return {
+          id: hostedZone.Id?.replace("/hostedzone/", "") ?? "",
+          name: hostedZone.Name?.slice(0, -1) ?? "",
+        };
       });
     } catch (error) {
       console.error(error);
