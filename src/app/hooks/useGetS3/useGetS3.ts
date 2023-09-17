@@ -4,7 +4,7 @@ import { S3Service } from "@/aws/s3/s3.service";
 import {
   UseGetS3ObjectsReturnType,
   UseGetS3ReturnType,
-} from "./hooks-s3.types";
+} from "./types/hooks-s3.types";
 
 export const useGetS3 = (): UseGetS3ReturnType => {
   const s3Service = S3Service.initInstance();
@@ -20,7 +20,7 @@ export const useGetS3 = (): UseGetS3ReturnType => {
 };
 
 export const useGetS3Objects = (
-  bucketName: string
+  bucketName: string,
 ): UseGetS3ObjectsReturnType => {
   const s3Service = S3Service.initInstance();
 

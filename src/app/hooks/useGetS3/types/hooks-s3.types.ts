@@ -1,5 +1,5 @@
 import { Bucket } from "@aws-sdk/client-s3";
-import { S3Object } from "../../../aws/s3/types/s3.types";
+import { S3ObjectResponse } from "../../../../aws/s3/types/s3.types";
 
 export type UseGetS3ReturnType = {
   s3Data: Bucket[];
@@ -7,6 +7,6 @@ export type UseGetS3ReturnType = {
 };
 
 export type UseGetS3ObjectsReturnType = {
-  s3ObjectsData: S3Object[];
+  s3ObjectsData: S3ObjectResponse[];
   isS3ObjectsDataSuccess: boolean;
 };
