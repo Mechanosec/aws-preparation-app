@@ -9,20 +9,20 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import BaseTable from "@/app/components/BaseTable/BaseTable";
-import { s3TableColumns } from "@/app/components/S3Page/data";
 import TablePagination from "@/app/components/BasePagination/BasePagination";
-import { useGetS3 } from "../../hooks/useGetS3/useGetS3";
+import { useGetRoute53 } from "../../hooks/useGetRoute53/useGetRoute53";
+import { route53TableColumns } from "./data";
 
-const S3Page: FC = () => {
+const Route53Page: FC = () => {
   const [rowSelection, setRowSelection] = useState({});
   const [sorting, setSorting] = useState<SortingState>([]);
 
-  const { s3Data } = useGetS3();
+  const { route53Data } = useGetRoute53();
 
-  const columns = useMemo(() => s3TableColumns, []);
+  const columns = useMemo(() => route53TableColumns, []);
 
   const table = useReactTable({
-    data: s3Data,
+    data: route53Data,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
@@ -45,4 +45,4 @@ const S3Page: FC = () => {
   );
 };
 
-export default S3Page;
+export default Route53Page;

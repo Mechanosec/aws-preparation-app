@@ -9,8 +9,10 @@ type UseGetS3ReturnType = {
 };
 
 export const useGetS3 = (): UseGetS3ReturnType => {
+  const s3Service = S3Service.initInstance();
+
   const { isSuccess, data } = useQuery([QueryKey.BUCKET], () => {
-    return new S3Service().getAll();
+    return s3Service.getAll();
   });
 
   return {
