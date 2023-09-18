@@ -7,8 +7,8 @@ const SideMenu: React.FC = () => {
     <nav className={styles.sideMenu}>
       <ul>
         <li>
-          <Link href="/">
-            <span>Projects</span>
+          <Link href="/hosted-zone-routes">
+            <span>Hosted zone</span>
           </Link>
         </li>
         <li>
